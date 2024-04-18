@@ -12,6 +12,8 @@ int	close_and_free(int keysys, t_vars *vars)
 	return (0);
 }
 
+
+
 int	main(void)
 {
 	t_vars	vars;
@@ -22,7 +24,12 @@ int	main(void)
 	img.img = mlx_new_image(vars.mlx, 700, 700);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_lenght, &img.endian);
 
-	my_mlx_pixel_put(&img, 25, 25, 0xFFFFFF);
+	int colore = create_trgb(0, 255, 0, 0);
+	int colore2 = create_trgb(0, 0, 255, 0);
+
+	draw_faded_square(&img, 400, 150, 250, colore, colore2);
+	draw_square(&img, 350, 150, 200, colore);
+
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 
 	mlx_key_hook(vars.win, close_and_free, &vars);

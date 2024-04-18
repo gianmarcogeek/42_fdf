@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/18 13:54:25 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:13:18 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,17 @@ typedef struct	s_data { //capire ogni elemento di questa struct
 }				t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+int	create_trgb(int t, int r, int g, int b);
+int	get_t(int trgb);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
+
+
+void	draw_line(t_data *data, int x_pos, int y_pos, int lenght, int color);
+void	draw_faded_square(t_data *data, int x_pos, int y_pos, int side, int color_start, int color_end);
+void	draw_square(t_data *data, int x_pos, int y_pos, int side, int color);
+
 
 #endif
