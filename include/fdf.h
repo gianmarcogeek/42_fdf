@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/22 23:22:16 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:43:29 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FDF
 
 # include <fcntl.h>
+# include <math.h>
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
