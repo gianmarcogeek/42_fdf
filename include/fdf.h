@@ -6,14 +6,14 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/18 19:13:18 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:22:16 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF
 #define FDF
 
-# include <stdlib.h>
+# include <fcntl.h>
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
@@ -21,6 +21,7 @@
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	void	*img;
 }				t_vars;
 
 typedef struct	s_data { //capire ogni elemento di questa struct
