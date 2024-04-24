@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/23 00:43:29 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/25 00:52:07 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}				t_vars;
-
 typedef struct	s_data { //capire ogni elemento di questa struct
 	void	*img;
 	char	*addr;
@@ -32,6 +26,14 @@ typedef struct	s_data { //capire ogni elemento di questa struct
 	int		line_lenght;
 	int		endian;
 }				t_data;
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+	char ***map;
+	t_data	img;
+}				t_vars;
+
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
