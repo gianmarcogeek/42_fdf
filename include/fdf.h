@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/25 00:52:07 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:45:37 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,15 @@ typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
 	char ***map;
-	t_data	img;
+	t_data	image;
+	
+	int center_x;
+	int center_y;
+	int scale;
+	int window_x;
+	int window_y;
+	int map_height;
+	int map_lenght;
 }				t_vars;
 
 
@@ -43,10 +51,12 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
-
 void	draw_line(t_data *data, int x_pos, int y_pos, int lenght, int color);
 void	draw_faded_square(t_data *data, int x_pos, int y_pos, int side, int color_start, int color_end);
 void	draw_square(t_data *data, int x_pos, int y_pos, int side, int color);
 
+int ft_count_lines(char *path);
+char ***init_map(char *path, int *map_height, int *map_lenght);
+void free_map(char ****map);
 
 #endif
