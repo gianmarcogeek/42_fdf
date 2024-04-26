@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/25 19:08:33 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:38:13 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,32 @@ char ***init_map(char *path, int *map_height, int *map_lenght)
 	*map_lenght = x;
 	close(fd);
 	return(map);
+}
+
+void print_map(t_vars *vars)
+{
+	int x = 0;
+	int y = 0;
+	int z = 0;
+
+	while(vars->map[y])
+	{
+		x = 0;
+		while(vars->map[y][x])
+		{
+			z = ft_atoi(vars->map[y][x]);
+			//int x_ISO = ((x - y) * cos(0.8));
+			//int y_ISO = ((x + y) * sin(0.8) - z) + ***offset?***;
+			if (vars->map[y][x + 1])
+				bresenham(vars, (x) * vars->scale, (y) * vars->scale, (x + 1) * vars->scale, (y) * vars->scale);
+			if (vars->map[y + 1])
+				bresenham(vars, (x) * vars->scale, (y) * vars->scale, (x) * vars->scale, (y + 1) * vars->scale);
+			x++;
+		}
+		y++;
+	}
+
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, vars->center_x, vars->center_y);
 }
 
 void free_map(char ****map)

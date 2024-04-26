@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/25 18:45:37 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:48:34 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
+
 
 typedef struct	s_data { //capire ogni elemento di questa struct
 	void	*img;
@@ -43,6 +44,8 @@ typedef struct	s_vars {
 }				t_vars;
 
 
+void bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y);
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int	create_trgb(int t, int r, int g, int b);
@@ -51,12 +54,9 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
-void	draw_line(t_data *data, int x_pos, int y_pos, int lenght, int color);
-void	draw_faded_square(t_data *data, int x_pos, int y_pos, int side, int color_start, int color_end);
-void	draw_square(t_data *data, int x_pos, int y_pos, int side, int color);
-
 int ft_count_lines(char *path);
 char ***init_map(char *path, int *map_height, int *map_lenght);
+void print_map(t_vars *vars);
 void free_map(char ****map);
 
 #endif

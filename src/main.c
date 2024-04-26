@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/25 19:45:58 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:37:33 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,67 @@
 
 /* TO-DO
 
-- implementa bresenham in un programma esterno
+- studia e capisci bresenham
 - riordina e norminetta todo
-- implementa bresenham con logica per collegare tutti i punti
-- implemente proiezione isometrica
+- implementa proiezione isometrica
 - gioca con gli hook
 
 */
 
 
 
-void print_map(t_vars *vars)
+void bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y)
 {
-	int x = 0;
-	int y = 0;
-	int z = 0;
-	while(vars->map[y])
-	{
-		x = 0;
-		while(vars->map[y][x])
-		{
-			z = ft_atoi(vars->map[y][x]);
-			my_mlx_pixel_put(&vars->image, x * vars->scale, y * vars->scale, 0xFF00FF);
-			vars->center_x = (vars->window_x / 2) - (vars->map_lenght * vars->scale / 2);
-			vars->center_y = (vars->window_y / 2) - (vars->map_height * vars->scale / 2);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, vars->center_x, vars->center_y);
-			x++;
-		}
-		y++;
-	}
+    int dx = abs(B_x - A_x);
+    int dy = abs(B_y - A_y);
+
+    int decision;
+    if (dx >= dy) {
+        decision = 2 * dy - dx;
+    } else {
+        decision = 2 * dx - dy;
+    }
+
+    int x = A_x;
+    int y = A_y;
+    my_mlx_pixel_put(&vars->image, x, y, 0xFFFFF);
+
+    int s = 1;
+    int q = 1;
+
+    if (B_x < A_x)
+        q = -1;
+    if (B_y < A_y)
+        s = -1;
+
+    while (x != B_x || y != B_y)
+    {
+        if (dx >= dy)
+        {
+            if (decision >= 0)
+            {
+                decision += 2 * (dy - dx);
+                y += s;
+            }
+            decision += 2 * dy;
+            x += q;
+        }
+        else
+        {
+            if (decision >= 0)
+            {
+                decision += 2 * (dx - dy);
+                x += q;
+            }
+            decision += 2 * dx;
+            y += s;
+        }
+        my_mlx_pixel_put(&vars->image, x, y, 0xFFFFF);
+    }
 }
+
+
+
 
 int	keys_hook(int keysys, t_vars *vars)
 {
@@ -56,14 +87,20 @@ int	keys_hook(int keysys, t_vars *vars)
 		free(vars->mlx);
 		exit(1);
 	}
-	if(keysys == 0xff51)
-	{
-		vars->center_x--;
-		print_map(vars);
-	}
+	// if(keysys == 0xff51 || keysys == 0x61)
+	// {
+	// 	vars->center_x -= 10;
+	// 	print_map(vars);
+	// }
+	// if(keysys == 0xff53  || keysys == 0x64)
+	// {
+	// 	vars->center_x += 10;
+	// 	print_map(vars);
+	// }
 
 	return (0);
 }
+
 
 int	main()
 {
@@ -81,7 +118,13 @@ int	main()
 	vars.map_height = 0;
 	vars.map_lenght = 0;
 	vars.map = init_map("test.txt", &vars.map_height, &vars.map_lenght);
+	vars.center_x = (vars.window_x / 2) - (vars.map_lenght * vars.scale / 2);
+	vars.center_y = (vars.window_y / 2) - (vars.map_height * vars.scale / 2);
 	print_map(&vars);
+	//bresenham(&vars, 50, 500, 500, 50);
+	
+	//mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
+	
 
 	
 	mlx_key_hook(vars.win, keys_hook, &vars);
