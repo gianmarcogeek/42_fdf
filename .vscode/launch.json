@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/home/gianmarco/Desktop/common/fdf/fdf",
-			"args": [],
+			"args": ["test.fdf"],
 			"stopAtEntry": false,
 			"cwd": "/home/gianmarco/Desktop/common/fdf/",
 			"environment": [],

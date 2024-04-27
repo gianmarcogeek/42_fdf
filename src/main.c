@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/27 16:27:43 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/28 00:11:56 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int argc, char *argv[])
 	t_vars	vars;
 	if (argc == 2)
 	{
-		vars.scale = 50;
+		vars.scale = 80;
+		vars.angle = 0.6;
 
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru");
@@ -47,6 +48,7 @@ int	main(int argc, char *argv[])
 		print_map(&vars);
 
 		mlx_key_hook(vars.win, keys_hook, &vars);
+		mlx_hook(vars.win, 17, 0, &x_close_event, &vars);
 		mlx_loop(vars.mlx);
 	}
 	ft_printf("ARG ERROR");
