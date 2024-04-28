@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/28 00:11:56 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/28 13:06:19 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 /* TO-DO
 
-- studia e capisci bresenham
-- spezzetta bresenham in varie funzioni norminettate
-- riordina e norminetta todo
-- capisci come non far andare in segfault se la mappa sfora la window
+- studia, capisci e spezza in funzioni norminettate algoritmo bresenhem
+- capisci e implementa il controllo colori e mappa con colori
 
-- implementa proiezione isometrica
-- gioca con gli hook
-- aggiungi menu instruzioni e altri extra
+EXTRA:
+- implementa resizing basato sul valore massimo di xp / yp ... se sforano le 
+	dimensioni della win di 100 diminuisci la scala per farle entrare;
+- aggiungi controllo e display errori vari
+- aggiungi un menù con istruzioni per l'uso e hooks
+	- aggiungi vista di lato e dall'alto (S - U)
+	- traslazione con frecciette
+	- modifica scala con rotellina mouse
+	- modifica prospettiva entro un range tipo 0 - 0.8 con il tasto P
+	- implementa funzionamento a tasto premuto e non solo al rilascio
+- capisci come implementare rotazione sull'asse z
+- display delle info a schermo / zoom e angolo
+- display sul terminale delle info mappa / kb della mappa, dimensioni mappa
+
+
 
 */
 
@@ -42,9 +52,15 @@ int	main(int argc, char *argv[])
 		&vars.bitmap.endian);
 
 		vars.map = init_map(argv[1], &vars.map_height, &vars.map_lenght);
+		
+		if((vars.map_height * vars.scale) > WINDOW_Y - 300)
+		{
+			while((vars.map_height * vars.scale) > WINDOW_Y - 300)
+				vars.scale--;
+		} //da cambiare con un resizing che si basa sulla yp / xp massima
 
-		vars.center_x = (WINDOW_X / 2) - ((vars.map_lenght * vars.scale) / 2);
-		vars.center_y = (WINDOW_Y / 2) - ((vars.map_height * vars.scale) / 2);
+		vars.center_x = (WINDOW_X / 2) - ((vars.map_lenght * vars.scale) / 2); //anche il centro deve essere basato su la xp / yp massima
+		vars.center_y = (WINDOW_Y / 2) - ((vars.map_height * vars.scale) / 3);
 		print_map(&vars);
 
 		mlx_key_hook(vars.win, keys_hook, &vars);

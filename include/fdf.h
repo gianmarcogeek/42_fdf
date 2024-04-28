@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/28 00:13:02 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:04:00 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 void bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void background(t_vars *vars);
+void connect_right(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
+void connect_down(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
+
 
 //hooks
 int	keys_hook(int keysys, t_vars *vars);

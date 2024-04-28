@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/28 00:17:45 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:03:21 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,59 +25,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
     }
     return ;
 }
-
-// void bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y)
-// {
-//     int dx = abs(B_x - A_x);
-//     int dy = abs(B_y - A_y);
-
-//     int decision;
-//     if (dx >= dy)
-//     {
-//         decision = 2 * dy - dx;
-//     }
-//     else 
-//     {
-//         decision = 2 * dx - dy;
-//     }
-
-//     int x = A_x;
-//     int y = A_y;
-//     my_mlx_pixel_put(&vars->bitmap, x, y, 0xFFFFFF);
-
-//     int s = 1;
-//     int q = 1;
-
-//     if (B_x < A_x)
-//         q = -1;
-//     if (B_y < A_y)
-//         s = -1;
-
-//     while (x != B_x && y != B_y)
-//     {
-//         if (dx >= dy)
-//         {
-//             if (decision >= 0)
-//             {
-//                 decision += 2 * (dy - dx);
-//                 y += s;
-//             }
-//             decision += 2 * dy;
-//             x += q;
-//         }
-//         else
-//         {
-//             if (decision >= 0)
-//             {
-//                 decision += 2 * (dx - dy);
-//                 x += q;
-//             }
-//             decision += 2 * dx;
-//             y += s;
-//         }
-//         my_mlx_pixel_put(&vars->bitmap, x, y, 0xFFFFFF);
-//     }
-// }
 
 void bresenham(t_vars *vars, int xA, int yA, int xB, int yB) {
     int dx = abs(xB - xA);
@@ -99,7 +46,7 @@ void bresenham(t_vars *vars, int xA, int yA, int xB, int yB) {
             yA += sy;
         }
     }
-    my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);// Stampa il punto finale
+    my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);
 }
 
 void background(t_vars *vars)
@@ -118,4 +65,33 @@ void background(t_vars *vars)
         y++;
     }
     mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
+}
+
+void connect_right(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y)
+{
+    int xp_right;
+    int yp_right;
+    int z_right;
+	if (vars->map[y][x + 1])
+	{
+        z_right = ft_atoi(vars->map[y][x + 1]);
+		xp_right = (((x + 1) - y) * cos(vars->angle) * vars->scale) + offset_x;
+		yp_right = ((((x + 1) + y) * sin(vars->angle))- z_right) * vars->scale + offset_y;
+		bresenham(vars, xp, yp, xp_right, yp_right);
+	}
+}
+
+void connect_down(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y)
+{
+    int xp_down;
+    int yp_down;
+    int z_down;
+	if (vars->map[y + 1])
+	{
+        z_down = ft_atoi(vars->map[y + 1][x]);
+		xp_down = ((x - (y + 1)) * cos(vars->angle) * vars->scale) + offset_x;
+		yp_down = ((((x + (y + 1)) * sin(vars->angle))- z_down) * vars->scale) + offset_y;
+		bresenham(vars, xp, yp, xp_down, yp_down);
+	}
+
 }
