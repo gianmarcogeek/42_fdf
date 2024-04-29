@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/28 12:04:00 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:12:04 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 
 # define WINDOW_X 1280
 # define WINDOW_Y 720
+
+typedef struct s_line {
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
+} 				t_line;
 
 typedef	struct s_data { //capire ogni elemento di questa struct (è la struttura di un bitmap)
 	void	*img;
@@ -46,30 +55,30 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 	double angle;
 }				t_vars;
 
-//draw_lines
-void bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y);
+//draw_utils
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void background(t_vars *vars);
-void connect_right(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
-void connect_down(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
+void	draw_background(t_vars *vars);
 
-
-//hooks
-int	keys_hook(int keysys, t_vars *vars);
-int x_close_event(t_vars *vars);
-
-
-//colors manage
-int	create_trgb(int t, int r, int g, int b);
-int	get_t(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
+//bresenham
+void	bresenham(t_vars *vars, int A_x, int A_y, int B_x, int B_y);
+void	connect_right(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
+void	connect_down(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int offset_y);
 
 //map_utils
 int ft_count_lines(char *path);
 char ***init_map(char *path, int *map_height, int *map_lenght);
 void print_map(t_vars *vars);
 void free_map(char ****map);
+
+//hooks
+int	keys_hook(int keysys, t_vars *vars);
+int x_close_event(t_vars *vars);
+
+//colors
+int	create_trgb(int t, int r, int g, int b);
+int	get_t(int trgb);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
 
 #endif

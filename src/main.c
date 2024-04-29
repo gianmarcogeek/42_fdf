@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/28 13:06:19 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:22:43 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ EXTRA:
 - display delle info a schermo / zoom e angolo
 - display sul terminale delle info mappa / kb della mappa, dimensioni mappa
 
-
-
 */
 
 int	main(int argc, char *argv[])
 {
 	t_vars	vars;
+
 	if (argc == 2)
 	{
 		vars.scale = 80;
@@ -53,9 +52,9 @@ int	main(int argc, char *argv[])
 
 		vars.map = init_map(argv[1], &vars.map_height, &vars.map_lenght);
 		
-		if((vars.map_height * vars.scale) > WINDOW_Y - 300)
+		if ((vars.map_height * vars.scale) > WINDOW_Y - 300)
 		{
-			while((vars.map_height * vars.scale) > WINDOW_Y - 300)
+			while ((vars.map_height * vars.scale) > WINDOW_Y - 300)
 				vars.scale--;
 		} //da cambiare con un resizing che si basa sulla yp / xp massima
 
