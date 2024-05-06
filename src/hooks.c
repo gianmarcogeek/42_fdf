@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:11:52 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/29 11:21:18 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:17:42 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	keys_hook(int keysys, t_vars *vars)
 		free(vars->mlx);
 		exit(1);
 	}
+	/*
 	if (keysys == 0xff51 || keysys == 0x61)
 	{
 		vars->center_x -= 10;
@@ -65,12 +66,13 @@ int	keys_hook(int keysys, t_vars *vars)
 		draw_background(vars);
 		print_map(vars);
 	}
-	if (keysys == 0x2b)
+	if (keysys == 0x2b || keysys == 0x3d)
 	{
 		vars->scale += 1;
 		draw_background(vars);
 		print_map(vars);
 	}
+	*/
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/29 11:22:43 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/06 21:25:56 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		vars.scale = 80;
-		vars.angle = 0.6;
+		vars.angle = 0.78;
 
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru");
@@ -50,7 +50,7 @@ int	main(int argc, char *argv[])
 		&vars.bitmap.bits_per_pixel, &vars.bitmap.line_lenght, \
 		&vars.bitmap.endian);
 
-		vars.map = init_map(argv[1], &vars.map_height, &vars.map_lenght);
+		vars.map = init_map(argv[1], &vars.map_height, &vars.map_lenght, &point);
 		
 		if ((vars.map_height * vars.scale) > WINDOW_Y - 300)
 		{

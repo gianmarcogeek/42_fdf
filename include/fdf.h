@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/29 11:12:04 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/06 21:25:45 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 
 # define WINDOW_X 1280
 # define WINDOW_Y 720
+
+typedef struct s_point {
+	int x;
+	int y;
+	int z;
+	int xp;
+	int yp;
+}				t_point;
+
 
 typedef struct s_line {
 	int dx;
@@ -53,6 +62,8 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 	int center_y;
 
 	double angle;
+
+	t_point point;
 }				t_vars;
 
 //draw_utils
@@ -66,8 +77,8 @@ void	connect_down(t_vars *vars, int x, int y, int xp, int yp, int offset_x, int 
 
 //map_utils
 int ft_count_lines(char *path);
-char ***init_map(char *path, int *map_height, int *map_lenght);
-void print_map(t_vars *vars);
+char ***init_map(char *path, int *map_height, int *map_lenght, t_point *point);
+void print_map(t_vars *vars, t_point *point);
 void free_map(char ****map);
 
 //hooks
