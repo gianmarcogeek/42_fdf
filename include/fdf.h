@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/06 22:42:46 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:06:12 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 	double angle;
 
 	t_point point;
+	t_point p_right;
+	t_point p_down;
+
+	t_line line;
+	
 }				t_vars;
 
 //draw_utils
@@ -71,13 +76,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_background(t_vars *vars);
 
 //bresenham
-void	bresenham(t_vars *vars, int B_x, int B_y);
+void	bresenham(t_vars *vars, t_point end);
 void	connect_right(t_vars *vars);
 void	connect_down(t_vars *vars);
 
 //map_utils
 int ft_count_lines(char *path);
-char ***init_map(char *path, int *map_height, int *map_lenght, t_vars *vars);
+char ***init_map(char *path, t_vars *vars);
 void print_map(t_vars *vars);
 void free_map(char ****map);
 

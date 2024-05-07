@@ -6,22 +6,22 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/06 23:10:53 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:11:05 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static	void	determine_slope(int xA, int xB, int yA, int yB, int *sx, int *sy)
+static	void	determine_slope(int xA, int yA, t_vars *vars, t_point end)
 {
-	if (xA < xB)
-		*sx = 1;
+	if (xA < end.xp)
+		vars->line.sx = 1;
 	else
-		*sx = -1;
-	if (yA < yB)
-		*sy = 1;
+		vars->line.sx = -1;
+	if (yA < end.yp)
+		vars->line.sy = 1;
 	else
-		*sy = -1;
+		vars->line.sy = -1;
 }
 
 static	void	determine_err(int dx, int dy, int *err)
@@ -32,31 +32,30 @@ static	void	determine_err(int dx, int dy, int *err)
 		*err = -dy / 2;
 }
 
-void	bresenham(t_vars *vars, int xB, int yB) //porcoddio norminette
+void	bresenham(t_vars *vars, t_point end)
 {
-	t_line	line;
 	int xA;
 	int yA;
 
 	xA = vars->point.xp;
 	yA = vars->point.yp;
-	line.dx = abs(xB - xA);
-	line.dy = abs(yB - yA);
-	determine_slope(xA, xB, yA, yB, &line.sx, &line.sy);
-	determine_err(line.dx, line.dy, &line.err);
-	while (xA != xB || yA != yB)
+	vars->line.dx = abs(end.xp - xA);
+	vars->line.dy = abs(end.yp - yA);
+	determine_slope(xA, yA, vars, end);
+	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
+	while (xA != end.xp || yA != end.yp)
 	{
 		my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);
-		line.e2 = line.err;
-		if (line.e2 > -line.dx)
+		vars->line.e2 = vars->line.err;
+		if (vars->line.e2 > -vars->line.dx)
 		{
-			line.err -= line.dy;
-			xA += line.sx;
+			vars->line.err -= vars->line.dy;
+			xA += vars->line.sx;
 		}
-		if (line.e2 < line.dy)
+		if (vars->line.e2 < vars->line.dy)
 		{
-			line.err += line.dx;
-			yA += line.sy;
+			vars->line.err += vars->line.dx;
+			yA += vars->line.sy;
 		}
 	}
 	my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);
@@ -64,30 +63,26 @@ void	bresenham(t_vars *vars, int xB, int yB) //porcoddio norminette
 
 void	connect_right(t_vars *vars)
 {
-	t_point p_right;
-
-	p_right.x = vars->point.x + 1;
-	p_right.y = vars->point.y;
-	if (vars->map[p_right.y][p_right.x])
+	vars->p_right.x = vars->point.x + 1;
+	vars->p_right.y = vars->point.y;
+	if (vars->map[vars->p_right.y][vars->p_right.x])
 	{
-		p_right.z = ft_atoi(vars->map[p_right.y][p_right.x]);
-		p_right.xp = ((p_right.x - p_right.y) * cos(vars->angle) * vars->scale) + vars->center_x;
-		p_right.yp = (((p_right.x + p_right.y) * sin(vars->angle)) - p_right.z) * vars->scale + vars->center_y;
-		bresenham(vars, p_right.xp, p_right.yp);
+		vars->p_right.z = ft_atoi(vars->map[vars->p_right.y][vars->p_right.x]);
+		vars->p_right.xp = ((vars->p_right.x - vars->p_right.y) * cos(vars->angle) * vars->scale) + vars->center_x;
+		vars->p_right.yp = (((vars->p_right.x + vars->p_right.y) * sin(vars->angle)) - vars->p_right.z) * vars->scale + vars->center_y;
+		bresenham(vars, vars->p_right);
 	}
 }
 
 void	connect_down(t_vars *vars)
 {
-	t_point p_down;
-	
-	p_down.x = vars->point.x;
-	p_down.y = vars->point.y + 1;
-	if (vars->map[p_down.y])
+	vars->p_down.x = vars->point.x;
+	vars->p_down.y = vars->point.y + 1;
+	if (vars->map[vars->p_down.y])
 	{
-		p_down.z = ft_atoi(vars->map[p_down.y][p_down.x]);
-		p_down.xp = ((p_down.x - p_down.y) * cos(vars->angle) * vars->scale) + vars->center_x;
-		p_down.yp = (((p_down.x + p_down.y) * sin(vars->angle)) - p_down.z) * vars->scale + vars->center_y;
-		bresenham(vars, p_down.xp, p_down.yp);
+		vars->p_down.z = ft_atoi(vars->map[vars->p_down.y][vars->p_down.x]);
+		vars->p_down.xp = ((vars->p_down.x - vars->p_down.y) * cos(vars->angle) * vars->scale) + vars->center_x;
+		vars->p_down.yp = (((vars->p_down.x + vars->p_down.y) * sin(vars->angle)) - vars->p_down.z) * vars->scale + vars->center_y;
+		bresenham(vars, vars->p_down);
 	}
 }

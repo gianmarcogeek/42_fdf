@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:11:52 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/06 20:17:42 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:58:49 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	keys_hook(int keysys, t_vars *vars)
 		free(vars->mlx);
 		exit(1);
 	}
-	/*
+	
 	if (keysys == 0xff51 || keysys == 0x61)
 	{
 		vars->center_x -= 10;
@@ -63,16 +63,20 @@ int	keys_hook(int keysys, t_vars *vars)
 	if (keysys == 0x2d)
 	{
 		vars->scale -= 1;
+		vars->center_x = (WINDOW_X / 2) - (vars->point.xp - vars->center_x) / 2; //anche il centro deve essere basato su la xp / yp massima
+		vars->center_y = (WINDOW_Y / 2) - (vars->point.yp - vars->center_y) / 2;
 		draw_background(vars);
 		print_map(vars);
 	}
 	if (keysys == 0x2b || keysys == 0x3d)
 	{
 		vars->scale += 1;
+		vars->center_x = (WINDOW_X / 2) - (vars->point.xp - vars->center_x) / 2; //anche il centro deve essere basato su la xp / yp massima
+		vars->center_y = (WINDOW_Y / 2) - (vars->point.yp - vars->center_y) / 2;
 		draw_background(vars);
 		print_map(vars);
 	}
-	*/
+	
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/06 23:04:49 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:02:57 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_count_lines(char *path)
 	return (close(fd), n_lines);
 }
 
-char	***init_map(char *path, int *map_height, int *map_lenght, t_vars *vars)
+char	***init_map(char *path, t_vars *vars)
 {
 	int		fd;
 	char	*line;
@@ -50,10 +50,10 @@ char	***init_map(char *path, int *map_height, int *map_lenght, t_vars *vars)
 		line = get_next_line(fd);
 	}
 	map[vars->point.y] = NULL;
-	*map_height = vars->point.y;
+	vars->map_height = vars->point.y;
 	while (map[vars->point.y - 1][vars->point.x])
 		vars->point.x++;
-	*map_lenght = vars->point.x;
+	vars->map_lenght= vars->point.x;
 	return (close(fd), map);
 }
 

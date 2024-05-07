@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/06 23:09:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:05:24 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 /* TO-DO
 
-- studia, capisci e spezza in funzioni norminettate algoritmo bresenhem
+- studia, capisci e documenta bresenhem
+- sistema proiezione isometrica
 - capisci e implementa il controllo colori e mappa con colori
+- implementare un printmap "nascosto" per fare i checks
+- implementa resizing basato sul valore massimo di xp / yp (ora fa il check solo sull'ultimo valore di xp e di yp)
 
 EXTRA:
-- implementa resizing basato sul valore massimo di xp / yp ... se sforano le 
 	dimensioni della win di 100 diminuisci la scala per farle entrare;
 - aggiungi controllo e display errori vari
 - aggiungi un menù con istruzioni per l'uso e hooks
@@ -50,17 +52,24 @@ int	main(int argc, char *argv[])
 		&vars.bitmap.bits_per_pixel, &vars.bitmap.line_lenght, \
 		&vars.bitmap.endian);
 
-		vars.map = init_map(argv[1], &vars.map_height, &vars.map_lenght, &vars);
+		vars.map = init_map(argv[1], &vars);
 		
-		if ((vars.map_height * vars.scale) > WINDOW_Y - 300)
-		{
-			while ((vars.map_height * vars.scale) > WINDOW_Y - 300)
-				vars.scale--;
-		} //da cambiare con un resizing che si basa sulla yp / xp massima
 
-		vars.center_x = (WINDOW_X / 2) - ((vars.map_lenght * vars.scale) / 2); //anche il centro deve essere basato su la xp / yp massima
-		vars.center_y = (WINDOW_Y / 2) - ((vars.map_height * vars.scale) / 3);
 		print_map(&vars);
+		
+		if (((vars.point.yp) > WINDOW_Y) || ((vars.point.xp) > WINDOW_X))
+		{
+			while (((vars.point.yp) > WINDOW_Y - 150) || ((vars.point.xp) > WINDOW_X - 100))
+			{
+					vars.scale--;
+				draw_background(&vars);
+				print_map(&vars);
+			}
+		} //da cambiare con un resizing che si basa sulla yp / xp massima
+			vars.center_x = (WINDOW_X / 2) - (vars.point.xp / 2); //anche il centro deve essere basato su la xp / yp massima
+			vars.center_y = (WINDOW_Y / 2) - (vars.point.yp / 2);
+			draw_background(&vars);
+			print_map(&vars);
 
 		mlx_key_hook(vars.win, keys_hook, &vars);
 		mlx_hook(vars.win, 17, 0, &x_close_event, &vars);
