@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/08 10:57:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 16:47:30 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,40 @@ void	print_map(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
 	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
+}
+
+void	fake_print_map(t_vars *vars)
+{
+	vars->point.x = 0;
+	vars->point.y = 0;
+	while (vars->map[vars->point.y])
+	{
+		vars->point.x = 0;
+		while (vars->map[vars->point.y][vars->point.x])
+		{
+			vars->point.z = ft_atoi(vars->map[vars->point.y][vars->point.x]);
+			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
+			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
+			vars->point.x++;
+		}
+		vars->point.y++;
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
+	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
+}
+
+void	map_resizing(t_vars *vars)
+{
+	fake_print_map(vars);
+	if (((vars->point.yp) > WINDOW_Y) || ((vars->point.xp) > WINDOW_X))
+	{
+		while (((vars->point.yp) > WINDOW_Y - 150) || ((vars->point.xp) > WINDOW_X - 100))
+		{
+			vars->scale--; //aggiungere anche l'opzione scale++
+			draw_background(vars); 
+			fake_print_map(vars);
+		}
+	} 
 }
 
 void	free_map(char ****map)

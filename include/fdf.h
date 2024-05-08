@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/07 19:06:12 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 16:48:18 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ void	connect_down(t_vars *vars);
 //map_utils
 int ft_count_lines(char *path);
 char ***init_map(char *path, t_vars *vars);
+void	fake_print_map(t_vars *vars);
 void print_map(t_vars *vars);
+void	map_resizing(t_vars *vars);
 void free_map(char ****map);
 
 //hooks
