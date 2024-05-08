@@ -6,19 +6,19 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/07 19:11:05 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:11:36 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static	void	determine_slope(int xA, int yA, t_vars *vars, t_point end)
+static	void	determine_slope(t_vars *vars, t_point end)
 {
-	if (xA < end.xp)
+	if (vars->point.xp < end.xp)
 		vars->line.sx = 1;
 	else
 		vars->line.sx = -1;
-	if (yA < end.yp)
+	if (vars->point.yp < end.yp)
 		vars->line.sy = 1;
 	else
 		vars->line.sy = -1;
@@ -34,14 +34,14 @@ static	void	determine_err(int dx, int dy, int *err)
 
 void	bresenham(t_vars *vars, t_point end)
 {
-	int xA;
+	int xA; //variabili temporanee si può fare in altro modo?
 	int yA;
 
 	xA = vars->point.xp;
 	yA = vars->point.yp;
 	vars->line.dx = abs(end.xp - xA);
 	vars->line.dy = abs(end.yp - yA);
-	determine_slope(xA, yA, vars, end);
+	determine_slope(vars, end);
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
 	while (xA != end.xp || yA != end.yp)
 	{

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/07 18:02:57 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 10:57:32 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_map(t_vars *vars)
 		vars->point.y++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
-	mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
+	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
 }
 
 void	free_map(char ****map)

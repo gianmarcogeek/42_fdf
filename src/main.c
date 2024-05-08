@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/07 20:05:24 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:13:09 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 /* TO-DO
 
+- capisci e implementa il controllo colori e mappa con colori
 - studia, capisci e documenta bresenhem
 - sistema proiezione isometrica
-- capisci e implementa il controllo colori e mappa con colori
 - implementare un printmap "nascosto" per fare i checks
 - implementa resizing basato sul valore massimo di xp / yp (ora fa il check solo sull'ultimo valore di xp e di yp)
 
 EXTRA:
-	dimensioni della win di 100 diminuisci la scala per farle entrare;
 - aggiungi controllo e display errori vari
-- aggiungi un menù con istruzioni per l'uso e hooks
+- aggiungi un menù con istruzioni per l'uso e hooks sul terminale
 	- aggiungi vista di lato e dall'alto (S - U)
 	- traslazione con frecciette
 	- modifica scala con rotellina mouse
@@ -41,7 +40,7 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
-		vars.scale = 80;
+		vars.scale = 75;
 		vars.angle = 0.6;
 
 		vars.mlx = mlx_init();
@@ -61,8 +60,8 @@ int	main(int argc, char *argv[])
 		{
 			while (((vars.point.yp) > WINDOW_Y - 150) || ((vars.point.xp) > WINDOW_X - 100))
 			{
-					vars.scale--;
-				draw_background(&vars);
+					vars.scale--; //aggiungere anche l'opzione scale++
+				draw_background(&vars); 
 				print_map(&vars);
 			}
 		} //da cambiare con un resizing che si basa sulla yp / xp massima
