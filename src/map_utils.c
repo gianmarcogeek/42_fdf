@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/08 16:47:30 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:18:44 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	print_map(t_vars *vars)
 		vars->point.y++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
+	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFFFFFF, vars->name);
 	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
 }
 
-void	fake_print_map(t_vars *vars)
+void	scan_points(t_vars *vars)
 {
 	vars->point.x = 0;
 	vars->point.y = 0;
@@ -95,22 +96,22 @@ void	fake_print_map(t_vars *vars)
 		}
 		vars->point.y++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
-	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
 }
 
 void	map_resizing(t_vars *vars)
 {
-	fake_print_map(vars);
+	scan_points(vars);
 	if (((vars->point.yp) > WINDOW_Y) || ((vars->point.xp) > WINDOW_X))
 	{
 		while (((vars->point.yp) > WINDOW_Y - 150) || ((vars->point.xp) > WINDOW_X - 100))
 		{
 			vars->scale--; //aggiungere anche l'opzione scale++
 			draw_background(vars); 
-			fake_print_map(vars);
+			scan_points(vars);
 		}
 	} 
+	vars->def_scale = vars->scale;
+
 }
 
 void	free_map(char ****map)

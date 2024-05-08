@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/08 11:11:36 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/08 22:47:17 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,31 @@ static	void	determine_err(int dx, int dy, int *err)
 
 void	bresenham(t_vars *vars, t_point end)
 {
-	int xA; //variabili temporanee si può fare in altro modo?
-	int yA;
+	int	x_start; //variabili temporanee si può fare in altro modo?
+	int	y_start;
 
-	xA = vars->point.xp;
-	yA = vars->point.yp;
-	vars->line.dx = abs(end.xp - xA);
-	vars->line.dy = abs(end.yp - yA);
+	x_start = vars->point.xp;
+	y_start = vars->point.yp;
+	vars->line.dx = abs(end.xp - x_start);
+	vars->line.dy = abs(end.yp - y_start);
 	determine_slope(vars, end);
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
-	while (xA != end.xp || yA != end.yp)
+	while (x_start != end.xp || y_start != end.yp)
 	{
-		my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);
+		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, 0xFFFFF);
 		vars->line.e2 = vars->line.err;
 		if (vars->line.e2 > -vars->line.dx)
 		{
 			vars->line.err -= vars->line.dy;
-			xA += vars->line.sx;
+			x_start += vars->line.sx;
 		}
 		if (vars->line.e2 < vars->line.dy)
 		{
 			vars->line.err += vars->line.dx;
-			yA += vars->line.sy;
+			y_start += vars->line.sy;
 		}
 	}
-	my_mlx_pixel_put(&vars->bitmap, xA, yA, 0xFFFFF);
+	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, 0xFFFFF);
 }
 
 void	connect_right(t_vars *vars)
@@ -68,8 +68,10 @@ void	connect_right(t_vars *vars)
 	if (vars->map[vars->p_right.y][vars->p_right.x])
 	{
 		vars->p_right.z = ft_atoi(vars->map[vars->p_right.y][vars->p_right.x]);
-		vars->p_right.xp = ((vars->p_right.x - vars->p_right.y) * cos(vars->angle) * vars->scale) + vars->center_x;
-		vars->p_right.yp = (((vars->p_right.x + vars->p_right.y) * sin(vars->angle)) - vars->p_right.z) * vars->scale + vars->center_y;
+		vars->p_right.xp = ((vars->p_right.x - vars->p_right.y) * cos(vars->angle) *
+							vars->scale) + vars->center_x;
+		vars->p_right.yp = (((vars->p_right.x + vars->p_right.y) * sin(vars->angle)) - vars->p_right.z) *
+							vars->scale + vars->center_y;
 		bresenham(vars, vars->p_right);
 	}
 }
@@ -81,8 +83,10 @@ void	connect_down(t_vars *vars)
 	if (vars->map[vars->p_down.y])
 	{
 		vars->p_down.z = ft_atoi(vars->map[vars->p_down.y][vars->p_down.x]);
-		vars->p_down.xp = ((vars->p_down.x - vars->p_down.y) * cos(vars->angle) * vars->scale) + vars->center_x;
-		vars->p_down.yp = (((vars->p_down.x + vars->p_down.y) * sin(vars->angle)) - vars->p_down.z) * vars->scale + vars->center_y;
+		vars->p_down.xp = ((vars->p_down.x - vars->p_down.y) * cos(vars->angle) *
+							vars->scale) + vars->center_x;
+		vars->p_down.yp = (((vars->p_down.x + vars->p_down.y) * sin(vars->angle)) - vars->p_down.z) *
+							vars->scale + vars->center_y;
 		bresenham(vars, vars->p_down);
 	}
 }

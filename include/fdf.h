@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/08 16:48:18 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:04:07 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 	t_point point;
 	t_point p_right;
 	t_point p_down;
+	int def_scale;
 
 	t_line line;
+	char *name;
 	
 }				t_vars;
 
@@ -90,6 +92,7 @@ void free_map(char ****map);
 
 //hooks
 int	keys_hook(int keysys, t_vars *vars);
+int ft_keypressed(int keysys, t_vars *vars);
 int x_close_event(t_vars *vars);
 
 //colors
