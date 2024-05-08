@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 00:17:42 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/09 00:47:12 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char *argv[])
 		vars.name = ft_strtrim(argv[1] + 5, ".fdf");
 
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
 
 		vars.bitmap.img = mlx_new_image(vars.mlx, WINDOW_X, WINDOW_Y);

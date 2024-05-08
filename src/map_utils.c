@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 00:18:44 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/09 01:03:04 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	print_map(t_vars *vars)
 		vars->point.y++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
-	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFFFFFF, vars->name);
+	mlx_string_put(vars->mlx, vars->win, 50, 50, 0xFFFFFF, vars->name);
+	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFF00FF, "Fil'e ferru");
+	mlx_string_put(vars->mlx, vars->win, 1130, 690, 0xFFFFFF, "Isometric view");
+
 	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
 }
 
@@ -111,7 +114,6 @@ void	map_resizing(t_vars *vars)
 		}
 	} 
 	vars->def_scale = vars->scale;
-
 }
 
 void	free_map(char ****map)
