@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 00:47:19 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/10 00:04:45 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
 
-# define WINDOW_X 1280
-# define WINDOW_Y 720
+# define WINDOW_X 800
+# define WINDOW_Y 800
 
 typedef struct s_point {
 	int x;
@@ -28,6 +28,7 @@ typedef struct s_point {
 	int z;
 	int xp;
 	int yp;
+	int color;
 }				t_point;
 
 
@@ -70,6 +71,9 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 
 	t_line line;
 	char *name;
+	double x_angle;
+	int *max_xp;
+	int *max_yp;
 	
 }				t_vars;
 
@@ -85,14 +89,12 @@ void	connect_down(t_vars *vars);
 //map_utils
 int ft_count_lines(char *path);
 char ***init_map(char *path, t_vars *vars);
-void	fake_print_map(t_vars *vars);
+void	scan_points(t_vars *vars);
 void print_map(t_vars *vars);
 void	map_resizing(t_vars *vars);
 void free_map(char ****map);
-
 //hooks
 int	keys_hook(int keysys, t_vars *vars);
-int ft_keypressed(int keysys, t_vars *vars);
 int x_close_event(t_vars *vars);
 
 //colors

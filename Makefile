@@ -7,7 +7,7 @@ RESET = \e[0m
 #Compilation variables
 NAME = fdf
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Wall -Werror -Wextra
 INCLUDE = -I/usr/include -Imlx_linux 
 LINK = -lXext -lX11 -lm -lz
 

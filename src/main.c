@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 00:47:12 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/10 00:13:54 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 - capisci e implementa il controllo colori e mappa con colori
 - studia, capisci e documenta bresenhem
-- sistema proiezione isometrica
+- sistema proiezione isometrica implementando matrici di trasformazione
 - implementa resizing basato sul valore massimo di xp / yp (ora fa il check solo sull'ultimo valore di xp e di yp)
 
 EXTRA:
@@ -25,7 +25,6 @@ EXTRA:
 	- aggiungi vista di lato e dall'alto (S - U)
 	- traslazione con frecciette
 	- modifica scala con rotellina mouse
-	- modifica prospettiva entro un range tipo 0 - 0.8 con il tasto P
 	- implementa funzionamento a tasto premuto e non solo al rilascio
 - capisci come implementare rotazione sull'asse z
 - display delle info a schermo / zoom e angolo
@@ -36,13 +35,15 @@ EXTRA:
 int	main(int argc, char *argv[])
 {
 	t_vars	vars;
-
 	if (argc == 2)
 	{
 		vars.scale = 75;
 		vars.angle = 0.6;
-		vars.name = ft_strtrim(argv[1] + 5, ".fdf");
+		vars.angle = 0.5;
+		vars.name = argv[1] + 5;
+		vars.max_xp = malloc(sizeof(int));
 
+		
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
 
@@ -51,12 +52,12 @@ int	main(int argc, char *argv[])
 		&vars.bitmap.bits_per_pixel, &vars.bitmap.line_lenght, \
 		&vars.bitmap.endian);
 		ft_printf("\n\e[1m\e[92mInstructions\e[0m");
-		ft_printf("\n|- translate with arrows\e[0m\n");
+		ft_printf("\n|- translate with arrows\n");
 		ft_printf("|- zoom with [+] / [-]\n");
 		ft_printf("|- reset position [0]\n\n");
 		vars.map = init_map(argv[1], &vars);
 		
-		map_resizing(&vars); //da cambiare con un resizing che si basa sulla yp / xp massima
+		map_resizing(&vars); //da cambiare con un resizing che si basa sulla yp / xp massima fa cacare!!
 		
 		vars.center_x = (WINDOW_X / 2) - (vars.point.xp / 2) ; //anche il centro deve essere basato su la xp / yp massima
 		vars.center_y = (WINDOW_Y / 2) - (vars.point.yp / 2);

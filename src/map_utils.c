@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 01:03:04 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/10 00:07:01 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	print_map(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
 	mlx_string_put(vars->mlx, vars->win, 50, 50, 0xFFFFFF, vars->name);
 	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFF00FF, "Fil'e ferru");
-	mlx_string_put(vars->mlx, vars->win, 1130, 690, 0xFFFFFF, "Isometric view");
+	mlx_string_put(vars->mlx, vars->win, 700, 770, 0xFFFFFF, "Isometric view");
 
 	//mlx_string_put(vars->mlx, vars->win, 100, 50, 0xFFFFFF, ft_strjoin("Zoom x", ft_itoa(vars->scale)));
 }
@@ -87,6 +87,7 @@ void	scan_points(t_vars *vars)
 {
 	vars->point.x = 0;
 	vars->point.y = 0;
+
 	while (vars->map[vars->point.y])
 	{
 		vars->point.x = 0;
@@ -96,6 +97,8 @@ void	scan_points(t_vars *vars)
 			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
 			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
 			vars->point.x++;
+			if (vars->point.xp > *(vars->max_xp))
+				*(vars->max_xp) = vars->point.xp;
 		}
 		vars->point.y++;
 	}
@@ -104,12 +107,12 @@ void	scan_points(t_vars *vars)
 void	map_resizing(t_vars *vars)
 {
 	scan_points(vars);
-	if (((vars->point.yp) > WINDOW_Y) || ((vars->point.xp) > WINDOW_X))
+	if (((vars->point.yp) > WINDOW_Y) || (*(vars->max_xp) > WINDOW_X))
 	{
-		while (((vars->point.yp) > WINDOW_Y - 150) || ((vars->point.xp) > WINDOW_X - 100))
+		while (((vars->point.yp) > WINDOW_Y - 150) || (*(vars->max_xp) > WINDOW_X))
 		{
-			vars->scale--; //aggiungere anche l'opzione scale++
-			draw_background(vars); 
+			vars->scale--;
+			draw_background(vars);
 			scan_points(vars);
 		}
 	} 
