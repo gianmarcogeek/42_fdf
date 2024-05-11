@@ -6,22 +6,16 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 14:05:06 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 15:58:43 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:55:16 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	to_lower(char c)
+int	get_digit(char c, int digits_in_base)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
-}
+	int	max_digit;
 
-int get_digit(char c, int digits_in_base)
-{
-	int max_digit;
 	if (digits_in_base <= 10)
 		max_digit = digits_in_base + '0';
 	else
@@ -34,23 +28,27 @@ int get_digit(char c, int digits_in_base)
 		return (-1);
 }
 
-int ft_atoi_base(char *str, int str_base)
+int	ft_atoi_base(char *str, int str_base)
 {
-	int result = 0;
-	int sign = 1;
-	int digit;
+	int	result;
+	int	sign;
+	int	digit;
 
+	result = 0;
+	sign = 1;
+	digit = 0;
 	if (*str == '-')
 	{
 		sign = -1;
-		++str;
+		str++;
 	}
-
-	while ((digit = get_digit(to_lower(*str), str_base)) >= 0)
+	digit = get_digit(ft_tolower(*str), str_base);
+	while (digit >= 0)
 	{
 		result = result * str_base;
 		result = result + (digit * sign);
-		++str;
+		str++;
+		digit = get_digit(ft_tolower(*str), str_base);
 	}
 	return (result);
 }

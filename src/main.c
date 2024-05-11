@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 16:12:37 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 18:16:13 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* TO-DO
 	- Bresenham con color interpolation tra A e B
-		* aggiungi ft_atoi_base a libft
+		* Capire come fare la sfumatura (scomponi colore iniziale e finale in r-g-b, calcola i tre delta e in base al segno calcola il passo (+/-))
 	- Gestione errori
 		* mappa inesistente (controllo sul open)
 		* file mappa che non rispetta le richieste ad esempio
@@ -24,12 +24,19 @@
 		* 
 */
 
-void display_istructions(void)
+static void display_istructions(void)
 {
-		ft_printf("\n\e[1m\e[92mInstructions\e[0m");
-		ft_printf("\n|- translate with arrows\n");
-		ft_printf("|- zoom with [+] / [-]\n");
-		ft_printf("|- reset position [0]\n\n");
+	ft_printf("\e[1m\e[42m Change view \e[0m\n");
+	ft_printf("\e[1m|-\e[0m translate with arrows\n");
+	ft_printf("\e[1m|-\e[0m zoom with [+] / [-]\n");
+	ft_printf("\e[1m|-\e[0m reset position [0]\n");
+	ft_printf("\e[1m\n");
+}
+
+void display_error(char *error)
+{
+	ft_printf("Error! %s", error);
+	exit(1);
 }
 
 int	main(int argc, char *argv[])
@@ -42,6 +49,7 @@ int	main(int argc, char *argv[])
 		vars.angle = 0.6;
 		vars.angle = 0.5;
 		vars.name = argv[1] + 5;
+		vars.point.color.trgb = DEF_COLOR;
 		
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
@@ -51,11 +59,10 @@ int	main(int argc, char *argv[])
 		&vars.bitmap.bits_per_pixel, &vars.bitmap.line_lenght, \
 		&vars.bitmap.endian);
 		
-		ft_printf("LOADING MAP...");
+		ft_printf("Wait! Loading the map...\n\n");
 		
 		vars.map = init_map(argv[1], &vars);
 		
-		vars.point.color.trgb = 16777210;
 		display_istructions();
 		map_resizing(&vars); //da cambiare con un resizing che si basa sulla yp / xp massima fa cacare!!
 		
