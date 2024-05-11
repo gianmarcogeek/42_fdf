@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/10 00:07:01 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:27:56 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	scan_points(t_vars *vars)
 void	map_resizing(t_vars *vars)
 {
 	scan_points(vars);
-	if (((vars->point.yp) > WINDOW_Y) || (*(vars->max_xp) > WINDOW_X))
+	if (((vars->point.yp) > WINDOW_Y) || (vars->point.xp > WINDOW_X))
 	{
-		while (((vars->point.yp) > WINDOW_Y - 150) || (*(vars->max_xp) > WINDOW_X))
+		while ((vars->point.yp > WINDOW_Y - 150) || vars->point.xp > WINDOW_X - 150)
 		{
 			vars->scale--;
 			draw_background(vars);

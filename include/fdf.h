@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/10 00:04:45 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:23:41 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,20 @@
 # define WINDOW_X 800
 # define WINDOW_Y 800
 
+typedef struct s_color {
+	int t;
+	int r;
+	int g;
+	int b;
+}				t_color;
+
 typedef struct s_point {
 	int x;
 	int y;
 	int z;
 	int xp;
 	int yp;
-	int color;
+	t_color color;
 }				t_point;
 
 
