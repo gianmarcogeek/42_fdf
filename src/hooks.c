@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:11:52 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/09 00:49:45 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:11:51 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	keys_hook(int keysys, t_vars *vars)
 		// if (vars->point.x > 100)
 		// 	vars->scale -= 10;
 		// else
-		if(vars->scale > 7)
+		if(vars->scale > 1)
 		vars->scale -= 1;
 		draw_background(vars);
 		print_map(vars);

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 12:45:09 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:57:30 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <fcntl.h>
+#include <stdio.h>
 # include <math.h>
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/ft_printf/ft_printf.h"
@@ -106,7 +107,8 @@ int	keys_hook(int keysys, t_vars *vars);
 int x_close_event(t_vars *vars);
 
 //colors
-int	create_trgb(int t, int r, int g, int b);
+long long	create_trgb(t_color color);
+void split_trgb(t_color color);
 int	get_t(int trgb);
 int	get_r(int trgb);
 int	get_g(int trgb);

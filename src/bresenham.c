@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/08 22:47:17 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:49:19 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	bresenham(t_vars *vars, t_point end)
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
 	while (x_start != end.xp || y_start != end.yp)
 	{
-		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, 0xFFFFF);
+		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->point.color.trgb);
 		vars->line.e2 = vars->line.err;
 		if (vars->line.e2 > -vars->line.dx)
 		{
@@ -58,7 +58,7 @@ void	bresenham(t_vars *vars, t_point end)
 			y_start += vars->line.sy;
 		}
 	}
-	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, 0xFFFFF);
+	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->point.color.trgb);
 }
 
 void	connect_right(t_vars *vars)

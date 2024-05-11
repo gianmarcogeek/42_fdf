@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 14:01:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:12:37 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ int	main(int argc, char *argv[])
 		vars.bitmap.addr = mlx_get_data_addr(vars.bitmap.img, \
 		&vars.bitmap.bits_per_pixel, &vars.bitmap.line_lenght, \
 		&vars.bitmap.endian);
-
+		
+		ft_printf("LOADING MAP...");
+		
 		vars.map = init_map(argv[1], &vars);
 		
+		vars.point.color.trgb = 16777210;
 		display_istructions();
 		map_resizing(&vars); //da cambiare con un resizing che si basa sulla yp / xp massima fa cacare!!
 		

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 12:52:29 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:02:35 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ void	print_map(t_vars *vars)
 		while (vars->map[vars->point.y][vars->point.x])
 		{
 			vars->point.z = ft_atoi(vars->map[vars->point.y][vars->point.x]);
-			if(ft_strchr(vars->point.z, ','))
-				vars->point.color.trgb = ft_atoi_base(ft_strchr(vars->point.z, ',') + 1);
+			if((ft_strchr(vars->map[vars->point.y][vars->point.x], ',')) != NULL)
+				//vars->point.color.trgb = 16777210;
+				vars->point.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->point.y][vars->point.x], ',') + 3), 16);
+			else
+				vars->point.color.trgb = 16777215;
+			//printf("x[%i] y[%i] z[%i] color[%i]\n", vars->point.x, vars->point.y, vars->point.z, (int)vars->point.color.trgb);
 			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
 			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
 			connect_right(vars);
@@ -99,8 +103,6 @@ void	scan_points(t_vars *vars)
 			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
 			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
 			vars->point.x++;
-			if (vars->point.xp > *(vars->max_xp))
-				*(vars->max_xp) = vars->point.xp;
 		}
 		vars->point.y++;
 	}

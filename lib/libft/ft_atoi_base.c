@@ -6,77 +6,51 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 14:05:06 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 14:11:52 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:58:43 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_valid(int c, int baselen)
+char	to_lower(char c)
 {
-	if (ft_isdigit(c))
-		return (c - '0' < baselen);
-	if (ft_islower(c))
-		return (c - 'a' + 10 < baselen);
-	if (ft_isupper(c))
-		return (c - 'A' + 10 < baselen);
-	return (0);
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
 }
 
-static int	get_value(char c)
+int get_digit(char c, int digits_in_base)
 {
-	if (ft_isdigit(c))
+	int max_digit;
+	if (digits_in_base <= 10)
+		max_digit = digits_in_base + '0';
+	else
+		max_digit = digits_in_base - 10 + 'a';
+	if (c >= '0' && c <= '9' && c <= max_digit)
 		return (c - '0');
-	if (ft_islower(c))
-		return (c - 'a' + 10);
-	return (c - 'A' + 10);
+	else if (c >= 'a' && c <= 'f' && c <= max_digit)
+		return (10 + c - 'a');
+	else
+		return (-1);
 }
 
-static int	ft_checkbase(char *base)
+int ft_atoi_base(char *str, int str_base)
 {
-	int	i;
+	int result = 0;
+	int sign = 1;
+	int digit;
 
-	if (base == NULL || *base == 0 || !base[1])
-		return (0);
-	i = 1;
-	while ((base[i]))
+	if (*str == '-')
 	{
-		if (base[i] == '+' || base[i] == '-')
-			return (0);
-		if (base[i] - base[i - 1] != 1)
-			if (!(ft_isdigit(base[i - 1])
-					&& (base[i] == 'a' || base[i] == 'A')))
-				return (0);
-		i++;
+		sign = -1;
+		++str;
 	}
-	if (base[i])
-		return (0);
-	return (i);
-}
 
-int	ft_atoi_base(const char *str, char *base)
-{
-	int	sum;
-	int	i;
-	int	sign;
-	int	baselen;
-
-	baselen = ft_checkbase(base);
-	if (str == NULL || !*str || baselen == 0)
-		return (0);
-	i = 0;
-	sign = 1;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
-			sign = -1;
-	sum = 0;
-	while (is_valid(str[i], baselen))
+	while ((digit = get_digit(to_lower(*str), str_base)) >= 0)
 	{
-		sum *= baselen;
-		sum += get_value(str[i]);
-		i++;
+		result = result * str_base;
+		result = result + (digit * sign);
+		++str;
 	}
-	return (sign * sum);
+	return (result);
 }

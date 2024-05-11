@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:10:19 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 14:19:42 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:59:32 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char		*get_next_line(int fd);
 char		*line_realloc(char *old_line);
 void		ft_strcat_gnl(char *dst, char *src);
-int			ft_atoi_base(const char *str, char *base);
+int			ft_atoi_base(char *str, int base);
+int			ft_isspace(int c);
+int			ft_isupper(int c);
+int			ft_islower(int c);
 
 #endif
