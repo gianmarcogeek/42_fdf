@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 12:23:41 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:45:09 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WINDOW_Y 800
 
 typedef struct s_color {
+	int trgb;
 	int t;
 	int r;
 	int g;

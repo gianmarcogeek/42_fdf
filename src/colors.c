@@ -6,15 +6,23 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:31:34 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/18 19:10:48 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:51:18 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	create_trgb(int t, int r, int g, int b)
+int	create_trgb(t_color color)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (color.t << 24 | color.r << 16 | color.g << 8 | color.b);
+}
+
+int split_trgb(t_color color)
+{
+	color.t = (color.trgb >> 24) & 0xFF;
+	color.r = (color.trgb >> 16) & 0xFF;
+	color.g = (color.trgb >> 8) & 0xFF;
+	color.b = color.trgb & 0xFF;
 }
 
 int	get_t(int trgb)

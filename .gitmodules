@@ -1,3 +1,0 @@
-[submodule "lib/ft_printf/42_printf"]
-	path = lib/ft_printf/42_printf
-	url = git@github.com:gianmarcogeek/42_printf.git

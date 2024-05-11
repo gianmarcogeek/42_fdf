@@ -6,14 +6,22 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 12:07:38 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:01:32 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
 /* TO-DO
-	- Implementa bresenham con fade tra A e B
+	- Bresenham con color interpolation tra A e B
+		* aggiungi ft_atoi_base a libft
+	- Gestione errori
+		* mappa inesistente (controllo sul open)
+		* file mappa che non rispetta le richieste ad esempio
+			(minimo due punti)
+			(lettere prima della virgola)
+			(lettere dopo la f dopo la virgola)
+		* 
 */
 
 void display_istructions(void)

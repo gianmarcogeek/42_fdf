@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:20:48 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/01/25 18:29:55 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:17:37 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putstr_fd(char *s, int fd)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (s)

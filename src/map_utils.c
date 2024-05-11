@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 12:27:56 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:52:29 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	print_map(t_vars *vars)
 		while (vars->map[vars->point.y][vars->point.x])
 		{
 			vars->point.z = ft_atoi(vars->map[vars->point.y][vars->point.x]);
+			if(ft_strchr(vars->point.z, ','))
+				vars->point.color.trgb = ft_atoi_base(ft_strchr(vars->point.z, ',') + 1);
 			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
 			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
 			connect_right(vars);

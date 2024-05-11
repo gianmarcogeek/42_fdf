@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:10:19 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/04/22 16:43:29 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:19:42 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		ft_strcat(char *dst, char *src);
 size_t		ft_strlcat(char *dst, const char *src, size_t destsize);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int			ft_atoi(const char *str);
-long long		ft_atoll(const char *str);
+long long	ft_atoll(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
@@ -74,5 +74,6 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char		*get_next_line(int fd);
 char		*line_realloc(char *old_line);
 void		ft_strcat_gnl(char *dst, char *src);
+int			ft_atoi_base(const char *str, char *base);
 
 #endif
