@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 18:15:39 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 01:27:46 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ void	bresenham(t_vars *vars, t_point end)
 {
 	int	x_start; //variabili temporanee si può fare in altro modo?
 	int	y_start;
+	float t = 0.01;
 
 	x_start = vars->point.xp;
 	y_start = vars->point.yp;
-	vars->line.color = vars->point.color.trgb;
+	vars->line.color.trgb = vars->point.color.trgb;
 	vars->line.dx = abs(end.xp - x_start);
 	vars->line.dy = abs(end.yp - y_start);
 	determine_slope(vars, end);
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
 	while (x_start != end.xp || y_start != end.yp)
 	{
-		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color);
+		vars->line.color = calculate_color(vars->line.color, end.color, t);
+		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color.trgb);
 		vars->line.e2 = vars->line.err;
 		if (vars->line.e2 > -vars->line.dx)
 		{
@@ -59,7 +61,7 @@ void	bresenham(t_vars *vars, t_point end)
 			y_start += vars->line.sy;
 		}
 	}
-	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color);
+	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color.trgb);
 }
 
 void	connect_right(t_vars *vars)

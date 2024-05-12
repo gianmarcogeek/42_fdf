@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 18:17:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 01:21:56 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WINDOW_X 800
 # define WINDOW_Y 800
-# define DEF_COLOR 0x00FFFF
+# define DEF_COLOR 0xFFFFFF
 
 typedef struct s_color {
 	int trgb;
@@ -49,7 +49,7 @@ typedef struct s_line {
 	int sy;
 	int err;
 	int e2;
-	int color;
+	t_color color;
 } 				t_line;
 
 typedef	struct s_data { //capire ogni elemento di questa struct (è la struttura di un bitmap)
@@ -109,8 +109,9 @@ int	keys_hook(int keysys, t_vars *vars);
 int x_close_event(t_vars *vars);
 
 //colors
-long long	create_trgb(t_color color);
-void split_trgb(t_color color);
+t_color calculate_color(t_color A, t_color B, float t);
+int	create_trgb(t_color color);
+void split_trgb(t_color *color);
 int	get_t(int trgb);
 int	get_r(int trgb);
 int	get_g(int trgb);

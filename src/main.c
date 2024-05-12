@@ -6,17 +6,14 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 18:16:13 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 01:29:08 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
 /* TO-DO
-	- Bresenham con color interpolation tra A e B
-		* Capire come fare la sfumatura (scomponi colore iniziale e finale in r-g-b, calcola i tre delta e in base al segno calcola il passo (+/-))
 	- Gestione errori
-		* mappa inesistente (controllo sul open)
 		* file mappa che non rispetta le richieste ad esempio
 			(minimo due punti)
 			(lettere prima della virgola)
