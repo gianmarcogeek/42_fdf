@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:31:34 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 01:19:38 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:21:21 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_b(int trgb)
 	return (trgb & 0xFF);
 }
 
-t_color	calculate_color(t_color A, t_color B, float t)
+t_color	lerp_trgb(t_color A, t_color B, float t)
 {
 	t_color new_color;
 	

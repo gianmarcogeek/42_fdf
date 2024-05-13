@@ -6,35 +6,16 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 01:29:08 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:37:31 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
 /* TO-DO
-	- Gestione errori
-		* file mappa che non rispetta le richieste ad esempio
-			(minimo due punti)
-			(lettere prima della virgola)
-			(lettere dopo la f dopo la virgola)
-		* 
+	- Norminette e Valgrind
+	- Capire come "compilare" (./configuration) mlx dal makefile
 */
-
-static void display_istructions(void)
-{
-	ft_printf("\e[1m\e[42m Change view \e[0m\n");
-	ft_printf("\e[1m|-\e[0m translate with arrows\n");
-	ft_printf("\e[1m|-\e[0m zoom with [+] / [-]\n");
-	ft_printf("\e[1m|-\e[0m reset position [0]\n");
-	ft_printf("\e[1m\n");
-}
-
-void display_error(char *error)
-{
-	ft_printf("Error! %s", error);
-	exit(1);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -46,7 +27,7 @@ int	main(int argc, char *argv[])
 		vars.angle = 0.6;
 		vars.angle = 0.5;
 		vars.name = argv[1] + 5;
-		vars.point.color.trgb = DEF_COLOR;
+		vars.point.color.trgb = DEF_LINE_COLOR;
 		
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
@@ -73,6 +54,5 @@ int	main(int argc, char *argv[])
 		mlx_hook(vars.win, 2, 1L<<0, keys_hook, &vars);
 		mlx_loop(vars.mlx);
 	}
-	ft_printf("ARG ERROR");
-	exit(1);
+	ft_error("Wrong amount of parameters!\nTry using './fdf <your_map_path>'");
 }

@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 01:27:46 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:22:20 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	bresenham(t_vars *vars, t_point end)
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
 	while (x_start != end.xp || y_start != end.yp)
 	{
-		vars->line.color = calculate_color(vars->line.color, end.color, t);
+		vars->line.color = lerp_trgb(vars->line.color, end.color, t);
 		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color.trgb);
 		vars->line.e2 = vars->line.err;
 		if (vars->line.e2 > -vars->line.dx)
@@ -74,7 +74,7 @@ void	connect_right(t_vars *vars)
 		if((ft_strchr(vars->map[vars->p_right.y][vars->p_right.x], ',')) != NULL)
 				vars->p_right.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->p_right.y][vars->p_right.x], ',') + 3), 16);
 			else
-				vars->p_right.color.trgb = DEF_COLOR;
+				vars->p_right.color.trgb = DEF_LINE_COLOR;
 		vars->p_right.xp = ((vars->p_right.x - vars->p_right.y) * cos(vars->angle) *
 							vars->scale) + vars->center_x;
 		vars->p_right.yp = (((vars->p_right.x + vars->p_right.y) * sin(vars->angle)) - vars->p_right.z) *
@@ -93,7 +93,7 @@ void	connect_down(t_vars *vars)
 		if((ft_strchr(vars->map[vars->p_down.y][vars->p_down.x], ',')) != NULL)
 			vars->p_down.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->p_down.y][vars->p_down.x], ',') + 3), 16);
 		else
-			vars->p_down.color.trgb = DEF_COLOR;
+			vars->p_down.color.trgb = DEF_LINE_COLOR;
 		vars->p_down.xp = ((vars->p_down.x - vars->p_down.y) * cos(vars->angle) *
 							vars->scale) + vars->center_x;
 		vars->p_down.yp = (((vars->p_down.x + vars->p_down.y) * sin(vars->angle)) - vars->p_down.z) *

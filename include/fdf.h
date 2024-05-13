@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 01:21:56 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:22:57 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FDF_H
 
 # include <fcntl.h>
-#include <stdio.h>
 # include <math.h>
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/ft_printf/ft_printf.h"
@@ -22,7 +21,8 @@
 
 # define WINDOW_X 800
 # define WINDOW_Y 800
-# define DEF_COLOR 0xFFFFFF
+# define DEF_LINE_COLOR 0x8cffd0
+# define DEF_BACK_COLOR	0x000a25
 
 typedef struct s_color {
 	int trgb;
@@ -32,7 +32,7 @@ typedef struct s_color {
 	int b;
 }				t_color;
 
-typedef struct s_point {
+typedef struct s_point { //struttura punto
 	int x;
 	int y;
 	int z;
@@ -42,7 +42,7 @@ typedef struct s_point {
 }				t_point;
 
 
-typedef struct s_line {
+typedef struct s_line { //struttura linea (guardare, appuntare e studiare funzionamento bresenhem)
 	int dx;
 	int dy;
 	int sx;
@@ -82,15 +82,13 @@ typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others
 
 	t_line line;
 	char *name;
-	double x_angle;
-	int *max_xp;
-	int *max_yp;
-	
 }				t_vars;
 
 //draw_utils
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_background(t_vars *vars);
+void	display_istructions(void);
+void	ft_error(char *error);
 
 //bresenham
 void	bresenham(t_vars *vars, t_point end);
@@ -104,20 +102,19 @@ void	scan_points(t_vars *vars);
 void print_map(t_vars *vars);
 void	map_resizing(t_vars *vars);
 void free_map(char ****map);
+
+
 //hooks
 int	keys_hook(int keysys, t_vars *vars);
 int x_close_event(t_vars *vars);
 
 //colors
-t_color calculate_color(t_color A, t_color B, float t);
+t_color lerp_trgb(t_color A, t_color B, float t);
 int	create_trgb(t_color color);
 void split_trgb(t_color *color);
 int	get_t(int trgb);
 int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
-
-//error
-void display_error(char *error);
 
 #endif

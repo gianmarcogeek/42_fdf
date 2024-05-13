@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:07:16 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/11 18:16:52 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:28:12 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	***init_map(char *path, t_vars *vars)
 	vars->point.y = 0;
 	fd = open(path, O_RDWR);
 	if(fd < 0 || !ft_strnstr(path, ".fdf", ft_strlen(path)))
-		display_error("Are you sure is this a .fdf map?");
+		ft_error("Are you sure is this a .fdf map and you have all rights?");
 	map = (char ***)malloc((ft_count_lines(path) + 1) * sizeof(char **));
 	if (!map)
 		return (NULL);
@@ -72,7 +72,7 @@ void	print_map(t_vars *vars)
 			if((ft_strchr(vars->map[vars->point.y][vars->point.x], ',')) != NULL)
 				vars->point.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->point.y][vars->point.x], ',') + 3), 16);
 			else
-				vars->point.color.trgb = DEF_COLOR;
+				vars->point.color.trgb = DEF_LINE_COLOR;
 			//printf("x[%i] y[%i] z[%i] color[%i]\n", vars->point.x, vars->point.y, vars->point.z, (int)vars->point.color.trgb);
 			vars->point.xp = (vars->point.x - vars->point.y) * cos(vars->angle) * vars->scale + vars->center_x;
 			vars->point.yp = ((vars->point.x + vars->point.y) * sin(vars->angle) - vars->point.z) * vars->scale + vars->center_y;
