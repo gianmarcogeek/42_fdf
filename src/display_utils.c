@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:01:03 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 18:21:29 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:32:51 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void display_istructions(void)
 	ft_printf("\e[1m|-\e[0m zoom with [+] / [-]\n");
 	ft_printf("\e[1m|-\e[0m reset position [0]\n");
 	ft_printf("\e[1m\n");
+}
+
+void display_gui(t_vars *vars)
+{
+	mlx_string_put(vars->mlx, vars->win, 50, 50, 0xFFFFFF, vars->name);
+	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFF00FF, "Fil'e ferru");
+	mlx_string_put(vars->mlx, vars->win, 700, 770, 0xFFFFFF, "Isometric view");
 }
 
 void	ft_error(char *message)

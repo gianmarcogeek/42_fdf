@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 18:22:57 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:27:14 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,40 @@
 # define DEF_LINE_COLOR 0x8cffd0
 # define DEF_BACK_COLOR	0x000a25
 
-typedef struct s_color {
-	int trgb;
-	int t;
-	int r;
-	int g;
-	int b;
+typedef struct s_color
+{
+	int	trgb;
+	int	t;
+	int	r;
+	int	g;
+	int	b;
 }				t_color;
 
-typedef struct s_point { //struttura punto
-	int x;
-	int y;
-	int z;
-	int xp;
-	int yp;
-	t_color color;
+typedef struct s_point
+{
+	int		x;
+	int		y;
+	int		z;
+	int		xp;
+	int		yp;
+	t_color	color;
 }				t_point;
 
+//struttura linea (guardare, appuntare e studiare funzionamento bresenhem)
+typedef struct s_line
+{
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
+	t_color	color;
+}				t_line;
 
-typedef struct s_line { //struttura linea (guardare, appuntare e studiare funzionamento bresenhem)
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
-	t_color color;
-} 				t_line;
-
-typedef	struct s_data { //capire ogni elemento di questa struct (è la struttura di un bitmap)
+//struttura bitmap, studia un po'
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -60,34 +65,37 @@ typedef	struct s_data { //capire ogni elemento di questa struct (è la struttura
 	int		endian;
 }				t_data;
 
-typedef struct	s_vars { //da ordinare con sotto strutture tipo map_info / others_vars
+//variabili, da riordinare
+typedef struct s_vars
+{
 	void	*mlx;
 	void	*win;
-	char ***map;
+	char	***map;
 	t_data	bitmap;
-	
-	int map_height;
-	int map_lenght;
-	
-	int scale;
-	int center_x;
-	int center_y;
 
-	double angle;
+	int		scale;
+	int		def_scale;
+	int		center_x;
+	int		center_y;
 
-	t_point point;
-	t_point p_right;
-	t_point p_down;
-	int def_scale;
+	double	angle;
 
-	t_line line;
-	char *name;
+	t_point	point;
+	t_point	p_right;
+	t_point	p_down;
+	t_line	line;
+	char	*name;
 }				t_vars;
 
-//draw_utils
+
+//mlx_start
+void	mlx_start(t_vars *vars);
+
+//display_utils
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_background(t_vars *vars);
 void	display_istructions(void);
+void 	display_gui(t_vars *vars);
 void	ft_error(char *error);
 
 //bresenham
@@ -96,25 +104,26 @@ void	connect_right(t_vars *vars);
 void	connect_down(t_vars *vars);
 
 //map_utils
-int ft_count_lines(char *path);
-char ***init_map(char *path, t_vars *vars);
+int		ft_count_lines(char *path);
+char	***init_map(char *path, t_vars *vars);
 void	scan_points(t_vars *vars);
-void print_map(t_vars *vars);
+void	print_map(t_vars *vars);
 void	map_resizing(t_vars *vars);
-void free_map(char ****map);
-
+void	free_map(char ****map);
 
 //hooks
-int	keys_hook(int keysys, t_vars *vars);
-int x_close_event(t_vars *vars);
+int		keys_hook(int keysys, t_vars *vars);
+void	view_translate(int keysys, t_vars *vars);
+void	view_scale()
+//int		x_close_event(t_vars *vars);
 
 //colors
-t_color lerp_trgb(t_color A, t_color B, float t);
-int	create_trgb(t_color color);
-void split_trgb(t_color *color);
-int	get_t(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
+int		create_trgb(t_color color);
+t_color	lerp_trgb(t_color A, t_color B, float t);
+void	split_trgb(t_color *color);
+int		get_t(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
 
 #endif
