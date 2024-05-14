@@ -49,6 +49,7 @@ https://harm-smits.github.io/42docs/libs/minilibx.html
 
 ## How to project 3D to points to a 2D display?
 To create the isometric projection i have used the semplified formulas:
+  
 $x′ = (x - y) * cos(a);$
 $y' = (x + y) * sen(a) - z;$
 
