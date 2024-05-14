@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:01:03 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 21:32:51 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:32:41 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		offset = (y * data->line_lenght + x * (data->bits_per_pixel / 8));
 		dst = data->addr + offset;
 		*(unsigned int *) dst = color;
+	}
+}
+
+void	bresenham_pixel_put(t_data *data, t_line l)
+{
+	char	*dst;
+	int		offset;
+
+	if ((l.xp_curr >= 0 && l.xp_curr < WINDOW_X) \
+		&& (l.yp_curr >= 0 && l.yp_curr < WINDOW_Y))
+	{
+		offset = (l.yp_curr * data->line_lenght + l.xp_curr \
+					* (data->bits_per_pixel / 8));
+		dst = data->addr + offset;
+		*(unsigned int *) dst = l.color.trgb;
 	}
 }
 
@@ -43,22 +58,6 @@ void	draw_background(t_vars *vars)
 		y++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->bitmap.img, 0, 0);
-}
-
-void display_istructions(void)
-{
-	ft_printf("\e[1m\e[42m Change view \e[0m\n");
-	ft_printf("\e[1m|-\e[0m translate with arrows\n");
-	ft_printf("\e[1m|-\e[0m zoom with [+] / [-]\n");
-	ft_printf("\e[1m|-\e[0m reset position [0]\n");
-	ft_printf("\e[1m\n");
-}
-
-void display_gui(t_vars *vars)
-{
-	mlx_string_put(vars->mlx, vars->win, 50, 50, 0xFFFFFF, vars->name);
-	mlx_string_put(vars->mlx, vars->win, 50, 30, 0xFF00FF, "Fil'e ferru");
-	mlx_string_put(vars->mlx, vars->win, 700, 770, 0xFFFFFF, "Isometric view");
 }
 
 void	ft_error(char *message)

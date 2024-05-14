@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:11:52 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 23:27:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:33:32 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int	keys_hook(int keysys, t_vars *vars)
 		free(vars->mlx);
 		exit(1);
 	}
-	view_translate(keysys, vars);
-	view_scale(keysys, vars);
-
+	translate_view(keysys, vars);
+	scale_view(keysys, vars);
 	return (0);
 }
 
-void traslate_view(int keysys, t_vars *vars)
+void	translate_view(int keysys, t_vars *vars)
 {
 	if (keysys == 0xff51 || keysys == 0x61)
 		vars->center_x += 10;
@@ -43,7 +42,7 @@ void traslate_view(int keysys, t_vars *vars)
 	print_map(vars);
 }
 
-void scale_view(int keysys, t_vars *vars)
+void	scale_view(int keysys, t_vars *vars)
 {
 	if (keysys == 0x2d && vars->scale > 1)
 		vars->scale -= 1;
@@ -56,16 +55,6 @@ void scale_view(int keysys, t_vars *vars)
 		vars->center_x = (WINDOW_X / 2) - (vars->point.xp - vars->center_x) / 2;
 		vars->center_y = (WINDOW_Y / 2) - (vars->point.yp - vars->center_y) / 2;
 	}
-		draw_background(vars);
-		print_map(vars);
+	draw_background(vars);
+	print_map(vars);
 }
-
-// int	x_close_event(t_vars *vars)
-// {
-// 	free_map(&vars->map);
-// 	mlx_destroy_image(vars->mlx, vars->bitmap.img);
-// 	mlx_destroy_window(vars->mlx, vars->win);
-// 	mlx_destroy_display(vars->mlx);
-// 	free(vars->mlx);
-// 	exit(1);
-// }

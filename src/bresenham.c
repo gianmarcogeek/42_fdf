@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:59:46 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 17:22:20 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:25:11 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,30 @@ static	void	determine_err(int dx, int dy, int *err)
 
 void	bresenham(t_vars *vars, t_point end)
 {
-	int	x_start; //variabili temporanee si può fare in altro modo?
-	int	y_start;
-	float t = 0.01;
-
-	x_start = vars->point.xp;
-	y_start = vars->point.yp;
+	vars->line.xp_curr = vars->point.xp;
+	vars->line.yp_curr = vars->point.yp;
 	vars->line.color.trgb = vars->point.color.trgb;
-	vars->line.dx = abs(end.xp - x_start);
-	vars->line.dy = abs(end.yp - y_start);
+	vars->line.dx = abs(end.xp - vars->line.xp_curr);
+	vars->line.dy = abs(end.yp - vars->line.yp_curr);
 	determine_slope(vars, end);
 	determine_err(vars->line.dx, vars->line.dy, &vars->line.err);
-	while (x_start != end.xp || y_start != end.yp)
+	while (vars->line.xp_curr != end.xp || vars->line.yp_curr != end.yp)
 	{
-		vars->line.color = lerp_trgb(vars->line.color, end.color, t);
-		my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color.trgb);
+		vars->line.color = lerp_trgb(vars->line.color, end.color, LERP_STEP);
+		bresenham_pixel_put(&vars->bitmap, vars->line);
 		vars->line.e2 = vars->line.err;
 		if (vars->line.e2 > -vars->line.dx)
 		{
 			vars->line.err -= vars->line.dy;
-			x_start += vars->line.sx;
+			vars->line.xp_curr += vars->line.sx;
 		}
 		if (vars->line.e2 < vars->line.dy)
 		{
 			vars->line.err += vars->line.dx;
-			y_start += vars->line.sy;
+			vars->line.yp_curr += vars->line.sy;
 		}
 	}
-	my_mlx_pixel_put(&vars->bitmap, x_start, y_start, vars->line.color.trgb);
+	bresenham_pixel_put(&vars->bitmap, vars->line);
 }
 
 void	connect_right(t_vars *vars)
@@ -71,14 +67,8 @@ void	connect_right(t_vars *vars)
 	if (vars->map[vars->p_right.y][vars->p_right.x])
 	{
 		vars->p_right.z = ft_atoi(vars->map[vars->p_right.y][vars->p_right.x]);
-		if((ft_strchr(vars->map[vars->p_right.y][vars->p_right.x], ',')) != NULL)
-				vars->p_right.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->p_right.y][vars->p_right.x], ',') + 3), 16);
-			else
-				vars->p_right.color.trgb = DEF_LINE_COLOR;
-		vars->p_right.xp = ((vars->p_right.x - vars->p_right.y) * cos(vars->angle) *
-							vars->scale) + vars->center_x;
-		vars->p_right.yp = (((vars->p_right.x + vars->p_right.y) * sin(vars->angle)) - vars->p_right.z) *
-							vars->scale + vars->center_y;
+		parse_color(vars, &vars->p_right);
+		project_xy(vars, &vars->p_right, ANGLE);
 		bresenham(vars, vars->p_right);
 	}
 }
@@ -90,14 +80,8 @@ void	connect_down(t_vars *vars)
 	if (vars->map[vars->p_down.y])
 	{
 		vars->p_down.z = ft_atoi(vars->map[vars->p_down.y][vars->p_down.x]);
-		if((ft_strchr(vars->map[vars->p_down.y][vars->p_down.x], ',')) != NULL)
-			vars->p_down.color.trgb = ft_atoi_base((ft_strchr(vars->map[vars->p_down.y][vars->p_down.x], ',') + 3), 16);
-		else
-			vars->p_down.color.trgb = DEF_LINE_COLOR;
-		vars->p_down.xp = ((vars->p_down.x - vars->p_down.y) * cos(vars->angle) *
-							vars->scale) + vars->center_x;
-		vars->p_down.yp = (((vars->p_down.x + vars->p_down.y) * sin(vars->angle)) - vars->p_down.z) *
-							vars->scale + vars->center_y;
+		parse_color(vars, &vars->p_down);
+		project_xy(vars, &vars->p_down, ANGLE);
 		bresenham(vars, vars->p_down);
 	}
 }

@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_start.c                                        :+:      :+:    :+:   */
+/*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 21:15:38 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/13 21:23:58 by gpuscedd         ###   ########.fr       */
+/*   Created: 2024/05/14 12:17:46 by gpuscedd          #+#    #+#             */
+/*   Updated: 2024/05/14 13:38:18 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	mlx_start(t_vars *vars)
+void	project_xy(t_vars *vars, t_point *p, double angle)
 {
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, WINDOW_X, WINDOW_Y, "Fil'e ferru aka FDF | gpuscedd");
-
-	vars->bitmap.img = mlx_new_image(vars->mlx, WINDOW_X, WINDOW_Y);
-	vars->bitmap.addr = mlx_get_data_addr(vars->bitmap.img,
-						&(vars->bitmap.bits_per_pixel), &(vars->bitmap.line_lenght),
-						&(vars->bitmap.endian));
+	p->xp = (p->x - p->y) * cos(angle) * vars->scale + vars->center_x;
+	p->yp = ((p->x + p->y) * sin(angle) - p->z) * vars->scale + vars->center_y;
 }
