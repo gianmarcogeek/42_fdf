@@ -20,10 +20,10 @@
 # include <stdarg.h>
 
 # ifdef __APPLE__
-# define NIL_STRING "0x0"
+#  define NIL_STRING "0x0"
 # endif
 # ifdef __unix__
-# define NIL_STRING "(nil)"
+#  define NIL_STRING "(nil)"
 # endif
 
 int		ft_putchar_fd(char c, int fd);
