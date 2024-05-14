@@ -51,6 +51,7 @@ https://harm-smits.github.io/42docs/libs/minilibx.html
 To create the isometric projection i have used the semplified formulas:
   
 $x′ = (x - y) * cos(a);$
+  
 $y' = (x + y) * sen(a) - z;$
 
 To (try) undestand this formulas you have to look at Linear Algebra and Trasformations Matrices
