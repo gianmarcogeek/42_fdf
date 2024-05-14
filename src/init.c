@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:15:38 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 13:36:06 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:15:36 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	vars_init(t_vars *vars, char *path)
 		vars->name = path + 5;
 	else
 		vars->name = path + 7;
+	vars->mlx = NULL;
+	vars->win = NULL;
+	vars->map = NULL;
+	vars->def_scale = 0;
+	vars->center_x = 0;
+	vars->center_y = 0;
+	vars->point.xp = 0;
+	vars->point.yp = 0;
 }
 
 void	mlx_start(t_vars *vars)

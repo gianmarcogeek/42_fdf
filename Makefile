@@ -3,6 +3,7 @@ BOLD = \e[1m
 RED = \e[91m
 GREEN = \e[92m
 RESET = \e[0m
+CYAN = \e[36m
 
 #Compilation variables
 NAME = fdf
@@ -24,10 +25,10 @@ FT_PRINTF_A = $(FT_PRINTF_DIR)/libftprintf.a
 MLX_DIR = ./lib/minilibx-linux
 MLX_A = $(MLX_DIR)/libmlx_Linux.a
 
-$(NAME) : $(LIBFT_A) $(FT_PRINTF_A)
+$(NAME) : $(LIBFT_A) $(FT_PRINTF_A) $(MLX_A)
 	@echo "Compiling $(NAME)"
 	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT_A) $(FT_PRINTF_A) $(MLX_A) $(LINK) -o $(NAME)
-	@echo "$(BOLD)$(GREEN)$(NAME) compiled successfully!$(RESET)"
+	@echo "$(BOLD)$(CYAN)$(NAME) compiled successfully!$(RESET)"
 
 $(LIBFT_A) :
 	@echo "Compiling libft$(RESET)"
@@ -37,17 +38,23 @@ $(FT_PRINTF_A) :
 	@echo "Compiling ft_printf$(RESET)"
 	@$(MAKE) -s -C $(FT_PRINTF_DIR)
 
+$(MLX_A) :
+	@echo "Compiling minilibx$(RESET)"
+	@$(MAKE) -s -C $(MLX_DIR)
+
 all : $(NAME)
 
 clean :
 	@echo "$(BOLD)Cleaning...$(RESET)"
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
 	@$(MAKE) -s -C $(FT_PRINTF_DIR) clean
+	@$(MAKE) -s -C $(MLX_DIR) clean
 
 fclean : clean
 	@echo "$(BOLD)$(RED)Full cleaning...$(RESET)"
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 	@$(MAKE) -s -C $(FT_PRINTF_DIR) fclean
+	@$(MAKE) -s -C $(MLX_DIR) clean
 	@rm -f $(NAME)
 
 re : fclean all

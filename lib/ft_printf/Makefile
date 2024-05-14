@@ -15,7 +15,7 @@ OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
-	@echo "$(GREEN)$(NAME) created successfully!$(RESET)"
+	@echo "\e[1m$(GREEN)$(NAME) created successfully!$(RESET)"
 
 %.o : %.c $(HEADER)
 	@$(CC) $(CFLAGS) -c $< 

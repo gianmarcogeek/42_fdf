@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 13:32:08 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:18:16 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define WINDOW_Y 800
 # define DEF_LINE_COLOR 0x8cffd0
 # define DEF_BACK_COLOR	0x000a25
-# define ANGLE 0.6
+# define ANGLE 0.523599
 # define LERP_STEP 0.015
 
 typedef struct s_color
@@ -119,6 +119,7 @@ void	free_map(char ****map);
 int		keys_hook(int keysys, t_vars *vars);
 void	translate_view(int keysys, t_vars *vars);
 void	scale_view(int keysys, t_vars *vars);
+int		x_close_event(t_vars *vars);
 
 //colors
 void	parse_color(t_vars *vars, t_point *p);

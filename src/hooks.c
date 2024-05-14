@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:11:52 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 13:33:32 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:24:34 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ void	scale_view(int keysys, t_vars *vars)
 	}
 	draw_background(vars);
 	print_map(vars);
+}
+
+int	x_close_event(t_vars *vars)
+{
+	free_map(&vars->map);
+	mlx_destroy_image(vars->mlx, vars->bitmap.img);
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	exit(1);
 }
