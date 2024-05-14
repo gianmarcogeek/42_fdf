@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:56:50 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 15:18:16 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:43:16 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_point
 	t_color	color;
 }				t_point;
 
-//struttura linea (guardare, appuntare e studiare funzionamento bresenhem)
 typedef struct s_line
 {
 	int		xp_curr;
@@ -61,7 +60,6 @@ typedef struct s_line
 	t_color	color;
 }				t_line;
 
-//struttura bitmap, studia un po'
 typedef struct s_data
 {
 	void	*img;

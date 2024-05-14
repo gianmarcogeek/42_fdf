@@ -6,7 +6,7 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:15:38 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 15:15:36 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:44:08 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	vars_init(t_vars *vars, char *path)
 {
 	vars->scale = 75;
-	if (path[0] != '.')
-		vars->name = path + 5;
-	else
-		vars->name = path + 7;
+	vars->name = path;
 	vars->mlx = NULL;
 	vars->win = NULL;
 	vars->map = NULL;

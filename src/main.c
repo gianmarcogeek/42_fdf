@@ -6,15 +6,11 @@
 /*   By: gpuscedd <gpuscedd@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 22:49:57 by gpuscedd          #+#    #+#             */
-/*   Updated: 2024/05/14 15:24:12 by gpuscedd         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:36:35 by gpuscedd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-/* TO-DO
-	- Commentare un po' e iniziare a documentare come esercizio
-*/
 
 int	main(int argc, char *argv[])
 {
