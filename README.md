@@ -54,7 +54,7 @@ $x′ = (x - y) * cos(a);$
   
 $y' = (x + y) * sen(a) - z;$
 
-To (try) undestand this formulas you have to look at Linear Algebra and Trasformations Matrices
+To (try) understand this formulas you have to look at Linear Algebra and Trasformations Matrices
 - https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
 - http://learnwebgl.brown37.net/transformations2/transformations_matrices.html
 
